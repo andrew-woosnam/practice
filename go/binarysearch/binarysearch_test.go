@@ -1,45 +1,125 @@
 package binarysearch
 
-import (
-	"context"
-	"testing"
-	"time"
-)
+import "testing"
 
-func TestBinarySearch(t *testing.T) {
+func TestBinarySearchIterative_EmptyArray(t *testing.T) {
+	result := BinarySearchIterative([]int{}, 1)
+	if result != -1 {
+		t.Errorf("Expected -1 for empty array, got %d", result)
+	}
+}
+
+func TestBinarySearchIterative_SingleElementFound(t *testing.T) {
+	result := BinarySearchIterative([]int{1}, 1)
+	if result != 0 {
+		t.Errorf("Expected 0 for single element array where element is found, got %d", result)
+	}
+}
+
+func TestBinarySearchIterative_SingleElementNotFound(t *testing.T) {
+	result := BinarySearchIterative([]int{1}, 0)
+	if result != -1 {
+		t.Errorf("Expected -1 for single element array where element is not found, got %d", result)
+	}
+}
+
+func TestBinarySearchIterative_TwoElementsFirstElementFound(t *testing.T) {
+	result := BinarySearchIterative([]int{1, 2}, 1)
+	if result != 0 {
+		t.Errorf("Expected 0 for two element array where first element is found, got %d", result)
+	}
+}
+
+func TestBinarySearchIterative_TwoElementsSecondElementFound(t *testing.T) {
+	result := BinarySearchIterative([]int{1, 2}, 2)
+	if result != 1 {
+		t.Errorf("Expected 1 for two element array where second element is found, got %d", result)
+	}
+}
+
+func TestBinarySearchIterative_TwoElementsNotFound(t *testing.T) {
+	result := BinarySearchIterative([]int{1, 2}, 3)
+	if result != -1 {
+		t.Errorf("Expected -1 for two element array where element is not found, got %d", result)
+	}
+}
+
+func TestBinarySearchIterative_MultipleElementsFound(t *testing.T) {
 	tests := []struct {
 		arr      []int
 		target   int
 		expected int
 	}{
 		{arr: []int{1, 2, 3, 4, 5}, target: 3, expected: 2},
-		{arr: []int{1, 2, 3, 4, 5}, target: 6, expected: -1},
 		{arr: []int{1, 2, 3, 4, 5}, target: 1, expected: 0},
 		{arr: []int{1, 2, 3, 4, 5}, target: 5, expected: 4},
-		{arr: []int{}, target: 1, expected: -1},
-		{arr: []int{1}, target: 1, expected: 0},
-		{arr: []int{1}, target: 0, expected: -1},
 	}
 
-	for i, test := range tests {
-		t.Run("", func(t *testing.T) {
-			ctx, cancel := context.WithTimeout(context.Background(), 2*time.Second)
-			defer cancel()
+	for _, test := range tests {
+		result := BinarySearchIterative(test.arr, test.target)
+		if result != test.expected {
+			t.Errorf("For array %v and target %d, expected %d, got %d", test.arr, test.target, test.expected, result)
+		}
+	}
+}
 
-			done := make(chan struct{})
-			go func() {
-				result := BinarySearch(test.arr, test.target)
-				if result != test.expected {
-					t.Errorf("Test %d failed: got %d, expected %d", i+1, result, test.expected)
-				}
-				done <- struct{}{}
-			}()
+func TestBinarySearchRecursive_EmptyArray(t *testing.T) {
+	result := BinarySearchRecursive([]int{}, 1)
+	if result != -1 {
+		t.Errorf("Expected -1 for empty array, got %d", result)
+	}
+}
 
-			select {
-			case <-ctx.Done():
-				t.Errorf("Test %d timed out", i+1)
-			case <-done:
-			}
-		})
+func TestBinarySearchRecursive_SingleElementFound(t *testing.T) {
+	result := BinarySearchRecursive([]int{1}, 1)
+	if result != 0 {
+		t.Errorf("Expected 0 for single element array where element is found, got %d", result)
+	}
+}
+
+func TestBinarySearchRecursive_SingleElementNotFound(t *testing.T) {
+	result := BinarySearchRecursive([]int{1}, 0)
+	if result != -1 {
+		t.Errorf("Expected -1 for single element array where element is not found, got %d", result)
+	}
+}
+
+func TestBinarySearchRecursive_TwoElementsFirstElementFound(t *testing.T) {
+	result := BinarySearchRecursive([]int{1, 2}, 1)
+	if result != 0 {
+		t.Errorf("Expected 0 for two element array where first element is found, got %d", result)
+	}
+}
+
+func TestBinarySearchRecursive_TwoElementsSecondElementFound(t *testing.T) {
+	result := BinarySearchRecursive([]int{1, 2}, 2)
+	if result != 1 {
+		t.Errorf("Expected 1 for two element array where second element is found, got %d", result)
+	}
+}
+
+func TestBinarySearchRecursive_TwoElementsNotFound(t *testing.T) {
+	result := BinarySearchRecursive([]int{1, 2}, 3)
+	if result != -1 {
+		t.Errorf("Expected -1 for two element array where element is not found, got %d", result)
+	}
+}
+
+func TestBinarySearchRecursive_MultipleElementsFound(t *testing.T) {
+	tests := []struct {
+		arr      []int
+		target   int
+		expected int
+	}{
+		{arr: []int{1, 2, 3, 4, 5}, target: 3, expected: 2},
+		{arr: []int{1, 2, 3, 4, 5}, target: 1, expected: 0},
+		{arr: []int{1, 2, 3, 4, 5}, target: 5, expected: 4},
+	}
+
+	for _, test := range tests {
+		result := BinarySearchRecursive(test.arr, test.target)
+		if result != test.expected {
+			t.Errorf("For array %v and target %d, expected %d, got %d", test.arr, test.target, test.expected, result)
+		}
 	}
 }
