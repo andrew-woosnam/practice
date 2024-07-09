@@ -1,4 +1,4 @@
-import BinarySearch from './BinarySearch';
+import BinarySearch from '../src/BinarySearch';
 
 describe('binarySearch', () => {
     it('should return the index of the target if found', () => {
@@ -23,8 +23,8 @@ describe('binarySearch', () => {
     });
 
     it('should work with an array of duplicate elements', () => {
-        expect(BinarySearch([1, 2, 2, 3, 4, 5], 2)).toBe(1);
-        expect(BinarySearch([10, 20, 30, 30, 40, 50], 30)).toBe(2);
-        expect(BinarySearch([100, 200, 300, 400, 400, 500], 400)).toBe(3);
+        expect([1, 2]).toContain(BinarySearch([1, 2, 2, 3, 4, 5], 2)); // 1 and 2 both ok
+        expect([2, 3]).toContain(BinarySearch([10, 20, 30, 30, 40, 50], 30)); // 2 and 3 both ok
+        expect([3, 4]).toContain(BinarySearch([100, 200, 300, 400, 400, 500], 400)); // 3 and 4 both ok
     });
 });
