@@ -1,1 +1,95 @@
-**/node_modules/*
+# General
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+/java/build/
+
+# Gradle
+.gradle/
+/build/
+/out/
+!gradle-wrapper.jar
+!gradlew
+!gradlew.bat
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Node.js
+node_modules/
+*.js
+*.js.map
+*.d.ts
+.tsbuildinfo
+.npm
+.eslintcache
+.node_repl_history
+*.tgz
+.yarn-integrity
+.env
+.env.test
+.cache
+.parcel-cache
+.next
+out
+.nuxt
+dist
+.cache/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+
+# Coverage reports
+coverage
+*.lcov
+.nyc_output
+
+# Dependency directories
+bower_components
+
+# IDEs and editors
+.vscode
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Parcel-bundler cache
+.parcel-cache
+
+# Gatsby files
+.cache/
+.public
+
+# VuePress build output
+.vuepress/dist
+
+# Serverless directories
+.serverless/
+
+# FuseBox cache
+.fusebox/
+
+# DynamoDB Local files
+.dynamodb/
